@@ -8,6 +8,12 @@ pipeline {
             }
         }
 
+        stage('Install Dependencies') {
+            steps {
+                bat 'pip install -r requirements.txt'
+            }
+        }
+
         stage('Run Python') {
             steps {
                 bat 'python hello.py'
