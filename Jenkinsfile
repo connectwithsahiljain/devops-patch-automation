@@ -19,5 +19,13 @@ pipeline {
                 bat 'python hello.py'
             }
         }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
+        }
+    }    
     }
 }
