@@ -32,16 +32,33 @@
 
 
 
-node{
-    stage('checkout'){
-        checkout scm
-    }
+// node{    
+//     stage('checkout'){
+//         checkout scm
+//     }
 
-    stage('Run Python'){
-        bat 'python hello.py'
-    }
+//     stage('Run Python'){
+//         bat 'python hello.py'
+//     }
 
-    stage('Complete'){
-        echo 'Pipeline completed successfully.'
+//     stage('Complete'){
+//         echo 'Pipeline completed successfully.'
+//     }
+// }
+
+pipeline{
+    agent any
+
+    stages{
+        stage('Use Credentials'){
+            steps{
+                withCredentials([string(credentialsId: 'demo', variable: 'MY_SECRET')]){
+                    // Your steps that use the credentials go here
+                    bat "echo %MY_SECRET%"
+                }
+            }
+        }
     }
 }
+
+
